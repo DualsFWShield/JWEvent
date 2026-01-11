@@ -172,20 +172,31 @@
                     <h2 data-i18n="gallery.title">Nos Souvenirs</h2>
                 </div>
 
-                <div class="text-center" style="text-align:center;">
-                    <a href="#" id="onedrive-upload-btn" target="_blank" class="btn-gold" data-i18n="gallery.cta">
-                        Partager vos photos
-                    </a>
+                <div class="text-center" style="margin-bottom: 30px;">
+                    <div id="upload-zone" class="glass-panel" style="padding: 40px; border: 2px dashed rgba(255,255,255,0.3); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; max-width: 600px; margin: 0 auto;">
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                        <div id="upload-content">
+                            <span style="font-size: 3rem; display: block; margin-bottom: 10px;">📸</span>
+                            <h3 data-i18n="gallery.uploadTitle" style="margin-bottom: 5px;">Partager une photo</h3>
+                            <p data-i18n="gallery.uploadDesc" style="color: var(--text-muted); font-size: 0.9rem;">Cliquez ou glissez-déposez ici (Max 32MB)</p>
+                        </div>
+                        <div id="upload-progress" style="display: none; margin-top: 20px;">
+                            <div style="width: 100%; background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
+                                <div id="progress-bar" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.3s;"></div>
+                            </div>
+                            <p id="progress-text" style="font-size: 0.8rem; margin-top: 5px;">Préparation...</p>
+                        </div>
+                        <div id="upload-success" style="display: none; margin-top: 20px; color: #4ecca3;">
+                            ✅ Photo ajoutée !
+                        </div>
+                        <div id="upload-error" style="display: none; margin-top: 20px; color: #ff6b6b;">
+                            ❌ Erreur lors de l'envoi.
+                        </div>
+                    </div>
                 </div>
 
                 <div class="masonry-grid" id="gallery-grid">
-                    <!-- JS will populate -->
-                    <!-- MOCKUP IMAGES FOR PREVIEW -->
-                    <div class="masonry-item"><div class="placeholder-img" style="height:300px;">PHOTO 1</div></div>
-                    <div class="masonry-item"><div class="placeholder-img" style="height:450px;">PHOTO 2</div></div>
-                    <div class="masonry-item"><div class="placeholder-img" style="height:250px;">PHOTO 3</div></div>
-                    <div class="masonry-item"><div class="placeholder-img" style="height:350px;">PHOTO 4</div></div>
-                    <div class="masonry-item"><div class="placeholder-img" style="height:300px;">PHOTO 5</div></div>
+                    <!-- JS will populate from assets/gallery.json and Uploads -->
                 </div>
             </div>
         </section>

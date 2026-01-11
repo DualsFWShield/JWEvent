@@ -269,4 +269,220 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cursor) cursor.style.display = 'none'; // Hide on touch
     }
 
+    // --- 6. IMAGE UPLOAD & COMPRESSION (ImgBB) ---
+    setupUploadZone();
+
+    function setupUploadZone() {
+        const dropZone = document.getElementById('upload-zone');
+        const fileInput = document.getElementById('fileInput');
+        const progressContainer = document.getElementById('upload-progress');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const successMsg = document.getElementById('upload-success');
+        const errorMsg = document.getElementById('upload-error');
+        const uploadContent = document.getElementById('upload-content');
+
+        if (!dropZone || !fileInput) return;
+
+        // Click trigger
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        // Drag & Drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        ['dragleave', 'dragend'].forEach(evt => {
+            dropZone.addEventListener(evt, () => dropZone.classList.remove('dragover'));
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        });
+
+        // File Select
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) handleFile(e.target.files[0]);
+        });
+
+        function handleFile(file) {
+            // Reset UI
+            progressContainer.style.display = 'block';
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            uploadContent.style.opacity = '0.5';
+            progressBar.style.width = '0%';
+            progressText.innerText = "Analyse du fichier..."; // Default generic msg, will be translated if full re-run
+
+            const MAX_SIZE = 31 * 1024 * 1024; // 31MB
+
+            if (file.size > MAX_SIZE) {
+                progressText.innerText = "Compression en cours...";
+                compressImage(file, (compressedBlob) => {
+                    uploadToImgBB(compressedBlob);
+                });
+            } else {
+                uploadToImgBB(file);
+            }
+        }
+
+        function compressImage(file, callback) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (event) => {
+                const img = new Image();
+                img.src = event.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Resize logic: Max 4096px dimension to be safe & significant reduction
+                    let width = img.width;
+                    let height = img.height;
+                    const MAX_DIM = 4096;
+
+                    if (width > height) {
+                        if (width > MAX_DIM) {
+                            height *= MAX_DIM / width;
+                            width = MAX_DIM;
+                        }
+                    } else {
+                        if (height > MAX_DIM) {
+                            width *= MAX_DIM / height;
+                            height = MAX_DIM;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Compress to JPEG 0.8
+                    canvas.toBlob((blob) => {
+                        callback(blob);
+                    }, 'image/jpeg', 0.8);
+                };
+            };
+        }
+
+        function uploadToImgBB(file) {
+            progressText.innerText = "Envoi vers ImgBB...";
+            progressBar.style.width = '30%';
+
+            const formData = new FormData();
+            formData.append('key', '5ac2f3dcdf784f32f2e8e2e23f3dbe7d');
+            formData.append('image', file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://api.imgbb.com/1/upload', true);
+
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const percentComplete = (e.loaded / e.total) * 100;
+                    progressBar.style.width = Math.min(percentComplete, 90) + '%'; // Keep 10% for processing
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        progressBar.style.width = '100%';
+                        progressText.innerText = "Terminé !";
+                        successMsg.style.display = 'block';
+                        addToGallery(response.data.display_url || response.data.url);
+
+                        // Reset after delay
+                        setTimeout(() => {
+                            progressContainer.style.display = 'none';
+                            successMsg.style.display = 'none';
+                            uploadContent.style.opacity = '1';
+                            fileInput.value = ''; // Reset input
+                        }, 5000);
+                    } else {
+                        showError();
+                    }
+                } else {
+                    showError();
+                }
+            };
+
+            xhr.onerror = showError;
+
+            function showError() {
+                progressContainer.style.display = 'none';
+                errorMsg.style.display = 'block';
+                uploadContent.style.opacity = '1';
+            }
+
+            xhr.send(formData);
+        }
+
+        function addToGallery(url) {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const item = document.createElement('div');
+            item.className = 'masonry-item fade-in-section';
+
+            // Create proper Image element
+            const img = document.createElement('img');
+            img.src = url;
+            img.style.width = '100%';
+            img.style.borderRadius = '10px';
+            img.style.display = 'block';
+
+            item.appendChild(img);
+
+            // Prepend or Append? Prepend to show latest first
+            galleryGrid.insertBefore(item, galleryGrid.firstChild);
+
+            // Trigger scroll observer for animation
+            if (window.observer) window.observer.observe(item);
+            setTimeout(() => item.classList.add('is-visible'), 100);
+        }
+    }
+
+    // --- 7. AUTOMATIC GALLERY LOADING ---
+    loadGalleryImages();
+
+    async function loadGalleryImages() {
+        try {
+            // Add cache-busting to ensure instant updates
+            const response = await fetch(`assets/gallery.json?t=${new Date().getTime()}`);
+            if (!response.ok) throw new Error("Gallery manifest not found");
+
+            const images = await response.json();
+            const galleryGrid = document.getElementById('gallery-grid');
+
+            if (images.length > 0 && galleryGrid) {
+                // Clear any existing static items just in case (though we removed them)
+                galleryGrid.innerHTML = '';
+
+                images.forEach(src => {
+                    const item = document.createElement('div');
+                    item.className = 'masonry-item fade-in-section';
+
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.loading = "lazy";
+                    img.style.width = "100%";
+                    img.style.display = "block";
+                    img.style.borderRadius = "10px"; // Ensure styling matches
+
+                    item.appendChild(img);
+                    galleryGrid.appendChild(item);
+
+                    // Observe for animation
+                    if (typeof observer !== 'undefined') {
+                        observer.observe(item);
+                    } else {
+                        item.classList.add('is-visible'); // Fallback
+                    }
+                });
+            }
+        } catch (e) {
+            console.log("No dynamic gallery images found or error loading gallery.json", e);
+        }
+    }
+
 });

@@ -13,6 +13,8 @@
     "belgium.art": "This is not a country",
     "gallery.subtitle": "Precious Moments",
     "gallery.title": "Our Memories",
+    "gallery.uploadTitle": "Share a photo",
+    "gallery.uploadDesc": "Click or drag & drop here (Max 32MB)",
     "gallery.cta": "Share your photos",
     "assembly.photoPlaceholder": "Group photo coming soon",
     "belgium.atomiumTitle": "The Atomium",

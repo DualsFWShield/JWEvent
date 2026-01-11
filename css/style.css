@@ -489,6 +489,18 @@ img {
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
 }
 
+/* UPLOAD ZONE */
+#upload-zone:hover {
+    border-color: var(--gold) !important;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+#upload-zone.dragover {
+    border-color: var(--gold) !important;
+    background: rgba(212, 175, 55, 0.2);
+    transform: scale(1.02);
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
     .magazine-grid {
