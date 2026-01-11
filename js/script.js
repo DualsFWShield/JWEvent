@@ -207,43 +207,54 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // --- 4. LOCALE & TRANSLATIONS ---
+    // --- 4. LOCALE & TRANSLATIONS (FETCH BASED) ---
     const langSelect = document.getElementById('langSelect');
-    // Using global ALL_TRANSLATIONS from translations.js
+    let currentLang = CONFIG.defaultLang;
 
-    function setLanguage(lang) {
-        if (typeof ALL_TRANSLATIONS === 'undefined' || !ALL_TRANSLATIONS[lang]) {
-            console.error("Translation missing for:", lang);
-            return;
-        }
-
-        const translations = ALL_TRANSLATIONS[lang];
-
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const keys = el.getAttribute('data-i18n').split('.');
-            let val = translations;
-            keys.forEach(k => { val = val ? val[k] : null });
-            if (val) el.innerHTML = val;
-        });
-
+    async function loadTranslations(lang) {
         try {
-            localStorage.setItem('prefLang', lang);
-        } catch (e) {
-            console.warn("LocalStorage access blocked:", e);
+            const response = await fetch(`lang/${lang}.json`);
+            if (!response.ok) {
+                throw new Error(`Could not load translations for ${lang}`);
+            }
+            const translations = await response.json();
+            applyTranslations(translations);
+
+            // Save preference
+            try {
+                localStorage.setItem('prefLang', lang);
+            } catch (e) {
+                console.warn("LocalStorage access blocked:", e);
+            }
+        } catch (error) {
+            console.error("Translation error:", error);
         }
     }
 
+    function applyTranslations(translations) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const val = translations[key];
+            if (val) el.innerHTML = val;
+        });
+    }
+
     if (langSelect) {
-        let savedLang = CONFIG.defaultLang;
+        // Load saved language or default
         try {
-            savedLang = localStorage.getItem('prefLang') || CONFIG.defaultLang;
+            const saved = localStorage.getItem('prefLang');
+            if (saved) currentLang = saved;
         } catch (e) {
             console.warn("LocalStorage access blocked:", e);
         }
 
-        langSelect.value = savedLang;
-        setLanguage(savedLang);
-        langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+        langSelect.value = currentLang;
+        loadTranslations(currentLang);
+
+        langSelect.addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            loadTranslations(currentLang);
+        });
     }
 
     // --- 5. CUSTOM CURSOR (Hidden on touch devices usually, but kept for hybrid) ---

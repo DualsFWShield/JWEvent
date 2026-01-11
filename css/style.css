@@ -1,3 +1,10 @@
+/* UNIVERSAL RESET */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 :root {
     /* PALETTE "Dark Luxury" */
     --primary: #5DADE2;
