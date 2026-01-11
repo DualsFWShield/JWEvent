@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonjour - Assembly 2026</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Three.js (for STL) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- Smooth anims -->
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- CUSTOM CURSOR -->
+    <div id="cursor"></div>
+
+    <!-- MAIN WRAPPER -->
+    <main>
+
+        <!-- 1. HERO: VISUAL SHOCK -->
+        <section class="hero-section" id="hero">
+            <!-- Floating Words Container -->
+            <div id="bonjour-container" class="bonjour-cloud"></div>
+            
+            <!-- Parallax Layers -->
+            <div class="hero-text-layer layer-bg" data-speed="-2">Bonjour</div>
+            <div class="hero-text-layer layer-mid" data-speed="1">Welcome</div>
+            <div class="hero-text-layer layer-front" data-speed="2">Bonjour</div>
+            
+            <div class="scroll-indicator">
+                Découvrir ↓
+            </div>
+            
+            <!-- Hidden Language Trigger (hover area top right) -->
+            <div class="lang-trigger" style="position:absolute; top:30px; right:30px; z-index:100;">
+                <select id="langSelect" class="glass-panel" style="padding:10px; border:none; color:var(--primary);">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="nl">Nederlands</option>
+                    <option value="de">Deutsch</option>
+                    <option value="es">Español</option>
+                    <option value="pt">Português</option>
+                    <option value="ko">한국어</option>
+                    <option value="pap">Papiamento</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- 2. ASSEMBLY: GLASS HUB -->
+        <section class="info-section">
+            <div class="container">
+                <div class="glass-hub glass-panel">
+                    <div class="hub-main">
+                        <h2 class="hub-title" data-i18n="assembly.title">Notre Groupe</h2>
+                        <p class="hub-text" data-i18n="assembly.desc">
+                            Une assemblée unie par l'amour fraternel. Voici quelques souvenirs de notre groupe.
+                        </p>
+                        <!-- Group Photo Placeholder -->
+                        <!-- Group Photo Placeholder / Coming Soon -->
+                        <div style="height:300px; background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:10px; border:1px solid var(--glass-border);">
+                            <span style="font-size:3rem; margin-bottom:1rem;">👥</span>
+                            <span style="color:var(--text-muted); font-style:italic;">Photo de groupe à venir</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hub-visuals">
+                        <div class="hub-card glass-panel">
+                            <span class="hub-icon">📅</span>
+                            <h4 data-i18n="assembly.date">Été 2026</h4>
+                        </div>
+                        <div class="hub-card glass-panel">
+                            <span class="hub-icon">📍</span>
+                            <h4 data-i18n="assembly.location">Bruxelles</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. BELGIUM: THE ULTIMATE GUIDE (Magazine Grid) -->
+        <section class="belgium-section">
+            <div class="container">
+                <div class="magazine-header">
+                    <span data-i18n="belgium.subtitle">Exploration</span>
+                    <h2 data-i18n="belgium.title">L'Esprit Belge</h2>
+                </div>
+
+                <div class="magazine-grid">
+                    
+                    <!-- ATOMIUM (Full Width) -->
+                    <div class="mag-article span-full" style="height: 60vh;">
+                        <div id="atomium-container" style="width:100%; height:100%; background:#111;"></div>
+                        <div class="mag-content" style="pointer-events:none;">
+                            <h3>L'Atomium</h3>
+                            <p data-i18n="belgium.atomium">Le symbole futuriste de 1958.</p>
+                        </div>
+                    </div>
+
+                    <!-- GASTRONOMY (Large) -->
+                    <div class="mag-article span-large">
+                        <div class="mag-img-container">
+                            <img src="assets/chocolate.jpg" alt="Chocolat Belge">
+                        </div>
+                        <div class="mag-content">
+                            <h3 data-i18n="belgium.choco">L'Art du Chocolat</h3>
+                            <p data-i18n="belgium.chocoDesc">Pralines, ganaches et savoir-faire ancestral.</p>
+                        </div>
+                    </div>
+
+                    <!-- BEER (Small) -->
+                    <div class="mag-article span-small">
+                        <div class="mag-img-container">
+                            <img src="assets/beer.webp" alt="Bières Belges">
+                        </div>
+                        <div class="mag-content">
+                            <h3 data-i18n="belgium.beer">Bières d'Abbaye</h3>
+                            <p>Un patrimoine immatériel de l'UNESCO.</p>
+                        </div>
+                    </div>
+
+                    <!-- FRIES (Medium) -->
+                    <div class="mag-article text-only span-medium">
+                        <div class="mag-content">
+                            <h3 data-i18n="belgium.fries">La Frite Parfaite</h3>
+                            <p data-i18n="belgium.friesDesc">
+                                Le secret ? La double cuisson. Une fois à 140°C pour pocher, une seconde à 170°C pour dorer. Croustillante dehors, moelleuse dedans.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- COMICS (Medium) -->
+                    <div class="mag-article span-medium">
+                        <div class="mag-img-container">
+                            <img src="assets/BD.jpg" alt="Bande Dessinée">
+                        </div>
+                        <div class="mag-content">
+                            <h3 data-i18n="belgium.comics">Le 9ème Art</h3>
+                            <p>Tintin, Spirou, Les Schtroumpfs... Ici la BD est reine.</p>
+                        </div>
+                    </div>
+
+                    <!-- SURREALISM (Large) -->
+                    <div class="mag-article span-large">
+                        <div class="mag-img-container">
+                            <img src="assets/magrites.webp" alt="René Magritte">
+                        </div>
+                        <div class="mag-content">
+                            <h3 data-i18n="belgium.art">Ceci n'est pas un pays</h3>
+                            <p>Le surréalisme est dans notre ADN.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- INVENTIONS (Small) -->
+                    <div class="mag-article text-only span-small">
+                        <div class="mag-content">
+                            <h3>Le Saviez-vous ?</h3>
+                            <ul style="list-style:disc; margin-left:20px;">
+                                <li>Le Saxophone</li>
+                                <li>L'Asphalte</li>
+                                <li>L'Imc</li>
+                            </ul>
+                            <p>...sont des inventions belges !</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. GALLERY -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="magazine-header">
+                    <span data-i18n="gallery.subtitle">Moments Précieux</span>
+                    <h2 data-i18n="gallery.title">Nos Souvenirs</h2>
+                </div>
+
+                <div class="text-center" style="text-align:center;">
+                    <a href="#" id="onedrive-upload-btn" target="_blank" class="btn-gold" data-i18n="gallery.cta">
+                        Partager vos photos
+                    </a>
+                </div>
+
+                <div class="masonry-grid" id="gallery-grid">
+                    <!-- JS will populate -->
+                    <!-- MOCKUP IMAGES FOR PREVIEW -->
+                    <div class="masonry-item"><div class="placeholder-img" style="height:300px;">PHOTO 1</div></div>
+                    <div class="masonry-item"><div class="placeholder-img" style="height:450px;">PHOTO 2</div></div>
+                    <div class="masonry-item"><div class="placeholder-img" style="height:250px;">PHOTO 3</div></div>
+                    <div class="masonry-item"><div class="placeholder-img" style="height:350px;">PHOTO 4</div></div>
+                    <div class="masonry-item"><div class="placeholder-img" style="height:300px;">PHOTO 5</div></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/translations.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

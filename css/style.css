@@ -1,0 +1,511 @@
+:root {
+    /* PALETTE "Dark Luxury" */
+    --primary: #5DADE2;
+    /* Updated to Lighter Blue for contrast on Dark */
+    --primary-dim: #27527B;
+    /* Original Deep Blue for backgrounds */
+
+    --gold: #F1C40F;
+    /* Brighter Gold */
+    --gold-dim: #D4AF37;
+    /* Original Gold */
+
+    --text-main: #ECF0F1;
+    /* Off-White */
+    --text-muted: #BDC3C7;
+    /* Light Grey */
+    --text-dark: #ECF0F1;
+    /* Overflow Override */
+
+    --bg-body: #050505;
+    /* Deep Black */
+    --bg-surface: #121212;
+    /* Card Surface */
+
+    --glass: rgba(20, 20, 20, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+
+    --radius: 0px;
+    /* Sharp corners for Magazine look, or slight radius? Let's go slight soft. */
+    --radius-lg: 16px;
+
+    --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* CUSTOM CURSOR */
+* {
+    cursor: none;
+}
+
+/* Hide default */
+
+#cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--gold);
+    /* Gold cursor on dark */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.3s, height 0.3s, background 0.3s;
+    mix-blend-mode: normal;
+    /* Diff blend mode looks bad on dark sometimes, standard is safer */
+}
+
+#cursor.hovered {
+    width: 50px;
+    height: 50px;
+    background: rgba(241, 196, 15, 0.2);
+    border-color: var(--gold);
+}
+
+/* BASE */
+body {
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    /* Tighter for mobile */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    color: var(--primary);
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.9;
+    /* Slight dim on images */
+}
+
+/* CONTAINER: Mobile Default */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    /* Smaller padding for mobile */
+    max-width: 1400px;
+}
+
+/* Wider like magazine */
+
+/* GLASSMORPHISM UTILS */
+.glass-panel {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-glass);
+    border-radius: var(--radius-lg);
+}
+
+/* SECTION TITLES */
+.magazine-header {
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.magazine-header h2 {
+    font-size: 4rem;
+    color: var(--text-main);
+    position: relative;
+    z-index: 2;
+}
+
+.magazine-header span {
+    font-family: var(--font-body);
+    display: block;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+/* --- HERO: VISUAL SHOCK (Dark) --- */
+.hero-section {
+    min-height: 100vh;
+    /* Allow grow */
+    height: auto;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+    padding: 100px 0;
+    /* Safe padding for tall text */
+}
+
+/* Parallax typography layers */
+.hero-text-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Default centered position */
+    font-family: var(--font-heading);
+    white-space: nowrap;
+    pointer-events: none;
+    transform-origin: center center;
+    transition: transform 0.1s linear;
+    /* Smooth gyro */
+}
+
+.layer-bg {
+    font-size: 20vw;
+    /* Responsive size */
+    color: #111;
+    /* Dark grey */
+    z-index: 1;
+}
+
+.layer-mid {
+    font-size: 15vw;
+    color: rgba(93, 173, 226, 0.1);
+    z-index: 2;
+    mix-blend-mode: multiply;
+}
+
+.layer-front {
+    font-size: 12vw;
+    color: var(--text-main);
+    z-index: 3;
+    font-style: italic;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* FLOATING WORDS (Restored) */
+.bonjour-cloud {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    /* On top of BG but below text */
+    pointer-events: none;
+    overflow: hidden;
+    /* Contain words */
+}
+
+.floating-word {
+    position: absolute;
+    font-family: var(--font-body);
+    font-weight: 600;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+
+
+/* --- ASSEMBLY INFO: GLASS HUB --- */
+.info-section {
+    padding: 100px 0;
+    background: none;
+    /* Removed pattern-dot */
+    border-bottom: 1px solid #222;
+}
+
+.glass-hub {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hub-main {
+    padding: 60px;
+}
+
+.hub-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--gold);
+}
+
+.hub-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.hub-visuals {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.hub-card {
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.4s ease;
+}
+
+.hub-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+}
+
+.hub-icon {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: block;
+}
+
+
+/* --- BELGIUM: MAGAZINE GRID --- */
+.belgium-section {
+    padding: 60px 0;
+}
+
+/* Magazine Grid */
+.magazine-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Mobile First: Single column */
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .magazine-grid {
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 300px;
+    }
+}
+
+.mag-article {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.mag-img-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    flex-grow: 1;
+    /* Allow image to take available space */
+}
+
+.mag-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.mag-article:hover .mag-img-container img {
+    transform: scale(1.1);
+}
+
+.mag-content {
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    transform: translateY(20px);
+    transition: transform 0.4s;
+}
+
+.mag-article:hover .mag-content {
+    transform: translateY(0);
+}
+
+.mag-article:hover img {
+    transform: scale(1.1);
+    transition: transform 0.8s ease;
+}
+
+.mag-article h3 {
+    color: var(--gold);
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+}
+
+.mag-article p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+/* Grid Spans for Asymmetry */
+.span-full {
+    grid-column: span 12;
+    height: 500px;
+}
+
+/* Atomium e.g. */
+.span-large {
+    grid-column: span 8;
+}
+
+.span-medium {
+    grid-column: span 6;
+}
+
+.span-small {
+    grid-column: span 4;
+}
+
+/* Inverted style: White card with text, no image bg */
+.mag-article.text-only {
+    background: var(--bg-surface);
+    border: 1px solid #333;
+}
+
+.mag-article.text-only .mag-content {
+    background: none;
+    color: var(--text-muted);
+    position: relative;
+    transform: none;
+    padding: 40px;
+    height: 100%;
+}
+
+.mag-article.text-only h3 {
+    color: var(--primary);
+}
+
+/* Placeholder visuals */
+.placeholder-img {
+    background: #1a1a1a;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #444;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* --- GALLERY: MASONRY --- */
+.gallery-section {
+    background: var(--bg-body);
+    padding: 100px 0;
+}
+
+.masonry-grid {
+    column-count: 3;
+    column-gap: 24px;
+}
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 24px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+}
+
+.masonry-item img {
+    transition: 0.5s;
+}
+
+.masonry-item:hover img {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* CTA BUTTON */
+.btn-gold {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin: 40px auto;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gold:hover {
+    background: var(--gold);
+    color: #fff;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .magazine-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .hero-text-layer {
+        font-size: 10vw;
+    }
+
+    /* Mobile responsive text */
+    .glass-hub {
+        grid-template-columns: 1fr;
+    }
+
+    .masonry-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+
+    .hero-text-layer {
+        font-size: 15vw;
+    }
+}
