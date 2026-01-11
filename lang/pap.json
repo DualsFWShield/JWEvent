@@ -1,8 +1,6 @@
 {
     "assembly.title": "Nos Grupo",
-    "assembly.desc": "Un kongregashon uni pa amor fraternal. Ata algun rekuerdo di nos grupo.",
-    "assembly.date": "Zomer 2026",
-    "assembly.location": "Brusela",
+    "assembly.descExpanded": "Un asamblea internashonal uni pa amor fraternal. Biniendo di tur skina di mundu, nos ta reuni pa kompartí nos fe i goso. Ata algun rekuerdo inolvidabel di nos grupo.",
     "belgium.subtitle": "Eksplorashon",
     "belgium.title": "E Spiritu Belga",
     "belgium.atomium": "E simbolo futuristiko di 1958. Un kristal di heru magnifiká 165 bion biaha.",
@@ -15,5 +13,22 @@
     "belgium.art": "Esaki no ta un pais",
     "gallery.subtitle": "Momentunan Presioso",
     "gallery.title": "Nos Rekuerdonan",
-    "gallery.cta": "Kompartí bo potrètnan"
+    "gallery.cta": "Kompartí bo potrètnan",
+    "assembly.photoPlaceholder": "Potrèt di grupo pronto",
+    "belgium.atomiumTitle": "E Atomium",
+    "belgium.beerDesc": "Un patrimonio inmaterial di UNESCO.",
+    "belgium.comicsDesc": "Kuifje, Spirou, De Smurfen... Aki strip ta rei.",
+    "belgium.artDesc": "Surrealismo ta den nos DNA.",
+    "belgium.didYouKnow": "Bo tabata sa?",
+    "belgium.fact1": "E Saxofon",
+    "belgium.fact2": "Asfalt",
+    "belgium.fact3": "BMI",
+    "belgium.factFooter": "...ta inventonan belga!",
+    "hero.discover": "Deskubrí ↓",
+    "contact.subtitle": "Laga nos keda den kontakto",
+    "contact.title": "Kontaktonan",
+    "contact.dad": "Tata",
+    "contact.mom": "Mama",
+    "contact.daughter": "Yiu muhé",
+    "contact.son": "Yiu hòmber"
 }

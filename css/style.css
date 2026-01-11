@@ -121,8 +121,8 @@ img {
 /* GLASSMORPHISM UTILS */
 .glass-panel {
     background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-glass);
     border-radius: var(--radius-lg);
@@ -313,7 +313,10 @@ img {
 @media (min-width: 768px) {
     .magazine-grid {
         grid-template-columns: repeat(12, 1fr);
-        grid-auto-rows: 300px;
+        grid-auto-rows: auto;
+        /* Let content dictate height */
+        align-items: start;
+        /* Prevent stretching to match tallest if not desired, or 'stretch' */
     }
 }
 
@@ -321,7 +324,8 @@ img {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--glass-bg);
+    background: var(--bg-surface);
+    /* Solid background */
     border: 1px solid var(--glass-border);
     transition: transform 0.3s ease;
     display: flex;
@@ -330,16 +334,16 @@ img {
 
 .mag-img-container {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    flex-grow: 1;
-    /* Allow image to take available space */
+    height: auto;
+    /* Allow full height */
+    overflow: visible;
 }
 
 .mag-img-container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    /* Maintain aspect ratio */
+    display: block;
     transition: transform 0.8s ease;
 }
 
@@ -348,20 +352,18 @@ img {
 }
 
 .mag-content {
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    padding: 20px;
+    background: none;
+    position: relative;
     width: 100%;
-    color: white;
-    transform: translateY(20px);
-    transition: transform 0.4s;
+    color: var(--text-main);
+    transform: none;
+    transition: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .mag-article:hover .mag-content {
-    transform: translateY(0);
+    transform: none;
 }
 
 .mag-article:hover img {
@@ -385,7 +387,8 @@ img {
 /* Grid Spans for Asymmetry */
 .span-full {
     grid-column: span 12;
-    height: 500px;
+    grid-row: span 2;
+    /* Fix superposition */
 }
 
 /* Atomium e.g. */

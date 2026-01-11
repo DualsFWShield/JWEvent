@@ -1,8 +1,6 @@
 {
     "assembly.title": "Our Group",
-    "assembly.desc": "A congregation united by brotherly love. Here are some memories of our group.",
-    "assembly.date": "Summer 2026",
-    "assembly.location": "Brussels",
+    "assembly.descExpanded": "An international assembly united by brotherly love. Coming from all corners of the world, we gather to share our faith and joy. Here are some unforgettable memories of our group.",
     "belgium.subtitle": "Exploration",
     "belgium.title": "The Belgian Spirit",
     "belgium.atomium": "The futuristic symbol of 1958. An iron crystal magnified 165 billion times.",
@@ -15,5 +13,22 @@
     "belgium.art": "This is not a country",
     "gallery.subtitle": "Precious Moments",
     "gallery.title": "Our Memories",
-    "gallery.cta": "Share your photos"
+    "gallery.cta": "Share your photos",
+    "assembly.photoPlaceholder": "Group photo coming soon",
+    "belgium.atomiumTitle": "The Atomium",
+    "belgium.beerDesc": "An intangible UNESCO heritage.",
+    "belgium.comicsDesc": "Tintin, Spirou, The Smurfs... Here comics are king.",
+    "belgium.artDesc": "Surrealism is in our DNA.",
+    "belgium.didYouKnow": "Did you know?",
+    "belgium.fact1": "The Saxophone",
+    "belgium.fact2": "Asphalt",
+    "belgium.fact3": "BMI",
+    "belgium.factFooter": "...are Belgian inventions!",
+    "hero.discover": "Discover ↓",
+    "contact.subtitle": "Let's stay in touch",
+    "contact.title": "Contacts",
+    "contact.dad": "Dad",
+    "contact.mom": "Mom",
+    "contact.daughter": "Daughter",
+    "contact.son": "Son"
 }

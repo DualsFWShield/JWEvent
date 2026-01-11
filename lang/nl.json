@@ -1,8 +1,6 @@
 {
     "assembly.title": "Onze Groep",
-    "assembly.desc": "Een gemeente verenigd door broederlijke liefde. Hier zijn enkele herinneringen aan onze groep.",
-    "assembly.date": "Zomer 2026",
-    "assembly.location": "Brussel",
+    "assembly.descExpanded": "Een internationale vergadering verenigd door broederlijke liefde. Komend uit alle hoeken van de wereld, komen we samen om ons geloof en vreugde te delen. Hier zijn enkele onvergetelijke herinneringen aan onze groep.",
     "belgium.subtitle": "Verkenning",
     "belgium.title": "De Belgische Geest",
     "belgium.atomium": "Het futuristische symbool van 1958. Een ijzerkristal 165 miljard keer vergroot.",
@@ -15,5 +13,22 @@
     "belgium.art": "Dit is geen land",
     "gallery.subtitle": "Dierbare Momenten",
     "gallery.title": "Onze Herinneringen",
-    "gallery.cta": "Deel je foto's"
+    "gallery.cta": "Deel je foto's",
+    "assembly.photoPlaceholder": "Groepsfoto volgt binnenkort",
+    "belgium.atomiumTitle": "Het Atomium",
+    "belgium.beerDesc": "Een immaterieel UNESCO-erfgoed.",
+    "belgium.comicsDesc": "Kuifje, Robbedoes, De Smurfen... Hier is het stripverhaal koning.",
+    "belgium.artDesc": "Het surrealisme zit in ons DNA.",
+    "belgium.didYouKnow": "Wist je dat?",
+    "belgium.fact1": "De Saxofoon",
+    "belgium.fact2": "Asfalt",
+    "belgium.fact3": "De BMI",
+    "belgium.factFooter": "...Belgische uitvindingen zijn!",
+    "hero.discover": "Ontdekken ↓",
+    "contact.subtitle": "Laten we contact houden",
+    "contact.title": "Contacten",
+    "contact.dad": "Papa",
+    "contact.mom": "Mama",
+    "contact.daughter": "Dochter",
+    "contact.son": "Zoon"
 }

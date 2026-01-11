@@ -1,8 +1,6 @@
 {
     "assembly.title": "Nosso Grupo",
-    "assembly.desc": "Uma congregação unida pelo amor fraternal. Aqui estão algumas memórias do nosso grupo.",
-    "assembly.date": "Verão 2026",
-    "assembly.location": "Bruxelas",
+    "assembly.descExpanded": "Uma assembleia internacional unida pelo amor fraternal. Vindos de todos os cantos do mundo, nos reunimos para compartilhar nossa fé e alegria. Aqui estão algumas memórias inesquecíveis do nosso grupo.",
     "belgium.subtitle": "Exploração",
     "belgium.title": "O Espírito Belga",
     "belgium.atomium": "O símbolo futurista de 1958. Um cristal de ferro ampliado 165 bilhões de vezes.",
@@ -15,5 +13,22 @@
     "belgium.art": "Isto não é um país",
     "gallery.subtitle": "Momentos Preciosos",
     "gallery.title": "Nossas Memórias",
-    "gallery.cta": "Compartilhe suas fotos"
+    "gallery.cta": "Compartilhe suas fotos",
+    "assembly.photoPlaceholder": "Foto de grupo em breve",
+    "belgium.atomiumTitle": "O Atomium",
+    "belgium.beerDesc": "Um patrimônio imaterial da UNESCO.",
+    "belgium.comicsDesc": "Tintim, Spirou, Os Smurfs... Aqui a BD é rainha.",
+    "belgium.artDesc": "O surrealismo está em nosso DNA.",
+    "belgium.didYouKnow": "Você sabia?",
+    "belgium.fact1": "O Saxofone",
+    "belgium.fact2": "O Asfalto",
+    "belgium.fact3": "O IMC",
+    "belgium.factFooter": "...são invenções belgas!",
+    "hero.discover": "Descobrir ↓",
+    "contact.subtitle": "Vamos manter contato",
+    "contact.title": "Contatos",
+    "contact.dad": "Pai",
+    "contact.mom": "Mãe",
+    "contact.daughter": "Filha",
+    "contact.son": "Filho"
 }

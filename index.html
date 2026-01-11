@@ -35,7 +35,7 @@
             <div class="hero-text-layer layer-mid" data-speed="1">Welcome</div>
             <div class="hero-text-layer layer-front" data-speed="2">Bonjour</div>
             
-            <div class="scroll-indicator">
+            <div class="scroll-indicator" data-i18n="hero.discover">
                 Découvrir ↓
             </div>
             
@@ -60,25 +60,14 @@
                 <div class="glass-hub glass-panel">
                     <div class="hub-main">
                         <h2 class="hub-title" data-i18n="assembly.title">Notre Groupe</h2>
-                        <p class="hub-text" data-i18n="assembly.desc">
+                        <p class="hub-text" data-i18n="assembly.descExpanded">
                             Une assemblée unie par l'amour fraternel. Voici quelques souvenirs de notre groupe.
                         </p>
                         <!-- Group Photo Placeholder -->
                         <!-- Group Photo Placeholder / Coming Soon -->
                         <div style="height:300px; background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:10px; border:1px solid var(--glass-border);">
                             <span style="font-size:3rem; margin-bottom:1rem;">👥</span>
-                            <span style="color:var(--text-muted); font-style:italic;">Photo de groupe à venir</span>
-                        </div>
-                    </div>
-                    
-                    <div class="hub-visuals">
-                        <div class="hub-card glass-panel">
-                            <span class="hub-icon">📅</span>
-                            <h4 data-i18n="assembly.date">Été 2026</h4>
-                        </div>
-                        <div class="hub-card glass-panel">
-                            <span class="hub-icon">📍</span>
-                            <h4 data-i18n="assembly.location">Bruxelles</h4>
+                            <span style="color:var(--text-muted); font-style:italic;" data-i18n="assembly.photoPlaceholder">Photo de groupe à venir</span>
                         </div>
                     </div>
                 </div>
@@ -99,7 +88,7 @@
                     <div class="mag-article span-full" style="height: 60vh;">
                         <div id="atomium-container" style="width:100%; height:100%; background:#111;"></div>
                         <div class="mag-content" style="pointer-events:none;">
-                            <h3>L'Atomium</h3>
+                            <h3 data-i18n="belgium.atomiumTitle">L'Atomium</h3>
                             <p data-i18n="belgium.atomium">Le symbole futuriste de 1958.</p>
                         </div>
                     </div>
@@ -122,7 +111,7 @@
                         </div>
                         <div class="mag-content">
                             <h3 data-i18n="belgium.beer">Bières d'Abbaye</h3>
-                            <p>Un patrimoine immatériel de l'UNESCO.</p>
+                            <p data-i18n="belgium.beerDesc">Un patrimoine immatériel de l'UNESCO.</p>
                         </div>
                     </div>
 
@@ -131,7 +120,7 @@
                         <div class="mag-content">
                             <h3 data-i18n="belgium.fries">La Frite Parfaite</h3>
                             <p data-i18n="belgium.friesDesc">
-                                Le secret ? La double cuisson. Une fois à 140°C pour pocher, une seconde à 170°C pour dorer. Croustillante dehors, moelleuse dedans.
+                                Le secret ? La double cuisson. Une fois à 140°C pour pochar, une seconde à 170°C pour dorer. Croustillante dehors, moelleuse dedans.
                             </p>
                         </div>
                     </div>
@@ -143,7 +132,7 @@
                         </div>
                         <div class="mag-content">
                             <h3 data-i18n="belgium.comics">Le 9ème Art</h3>
-                            <p>Tintin, Spirou, Les Schtroumpfs... Ici la BD est reine.</p>
+                            <p data-i18n="belgium.comicsDesc">Tintin, Spirou, Les Schtroumpfs... Ici la BD est reine.</p>
                         </div>
                     </div>
 
@@ -154,20 +143,20 @@
                         </div>
                         <div class="mag-content">
                             <h3 data-i18n="belgium.art">Ceci n'est pas un pays</h3>
-                            <p>Le surréalisme est dans notre ADN.</p>
+                            <p data-i18n="belgium.artDesc">Le surréalisme est dans notre ADN.</p>
                         </div>
                     </div>
                     
                     <!-- INVENTIONS (Small) -->
                     <div class="mag-article text-only span-small">
                         <div class="mag-content">
-                            <h3>Le Saviez-vous ?</h3>
+                            <h3 data-i18n="belgium.didYouKnow">Le Saviez-vous ?</h3>
                             <ul style="list-style:disc; margin-left:20px;">
-                                <li>Le Saxophone</li>
-                                <li>L'Asphalte</li>
-                                <li>L'Imc</li>
+                                <li data-i18n="belgium.fact1">Le Saxophone</li>
+                                <li data-i18n="belgium.fact2">L'Asphalte</li>
+                                <li data-i18n="belgium.fact3">L'Imc</li>
                             </ul>
-                            <p>...sont des inventions belges !</p>
+                            <p data-i18n="belgium.factFooter">...sont des inventions belges !</p>
                         </div>
                     </div>
 
@@ -197,6 +186,51 @@
                     <div class="masonry-item"><div class="placeholder-img" style="height:250px;">PHOTO 3</div></div>
                     <div class="masonry-item"><div class="placeholder-img" style="height:350px;">PHOTO 4</div></div>
                     <div class="masonry-item"><div class="placeholder-img" style="height:300px;">PHOTO 5</div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT SECTION -->
+        <section class="contact-section" style="padding: 100px 0;">
+            <div class="container">
+                <div class="magazine-header">
+                    <span data-i18n="contact.subtitle">Restons en contact</span>
+                    <h2 data-i18n="contact.title">Contacts</h2>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
+                    <!-- Contact 1 -->
+                    <div class="glass-panel" style="padding: 20px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                        <h3 style="margin-bottom: 5px;">Alexandre Bruijninckx</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.dad">Papa</p>
+                        <p>📞 +32 486 45 90 06</p>
+                        <p>✉️ <a href="mailto:alexandre@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">alexandre@bruijninckx.net</a></p>
+                    </div>
+                    <!-- Contact 2 -->
+                    <div class="glass-panel" style="padding: 20px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                        <h3 style="margin-bottom: 5px;">Aurélie Bruijninckx</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.mom">Maman</p>
+                        <p>📞 +32 474 47 00 83</p>
+                        <p>✉️ <a href="mailto:aurelie@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">aurelie@bruijninckx.net</a></p>
+                    </div>
+                    <!-- Contact 3 -->
+                    <div class="glass-panel" style="padding: 20px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                        <h3 style="margin-bottom: 5px;">Naomi Bruijninckx</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.daughter">Fille</p>
+                        <p>📞 +32 493 65 28 21</p>
+                        <p>✉️ <a href="mailto:naomi@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">naomi@bruijninckx.net</a></p>
+                    </div>
+                    <!-- Contact 4 -->
+                    <div class="glass-panel" style="padding: 20px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                        <h3 style="margin-bottom: 5px;">Noah Bruijninckx</h3>
+                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.son">Fils</p>
+                        <p>📞 +32 486 05 28 06</p>
+                        <p>✉️ <a href="mailto:noah@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">noah@bruijninckx.net</a></p>
+                    </div>
                 </div>
             </div>
         </section>
