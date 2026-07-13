@@ -1,6 +1,15 @@
 {
+    "nav.group": "Unsere Gruppe",
+    "nav.belgium": "Belgien",
+    "nav.gallery": "Galerie",
+    "nav.contact": "Kontakt",
+    "hero.badge": "Internationale Versammlung",
+    "hero.discover": "Entdecken",
+    "assembly.subtitle": "Unsere Gemeinschaft",
     "assembly.title": "Unsere Versammlung",
     "assembly.descExpanded": "Unsere Versammlung hat ihren Sitz in Wavre und ihr Gebiet erstreckt sich über Louvain-la-Neuve.",
+    "assembly.international": "International",
+    "assembly.unity": "Vereint",
     "belgium.subtitle": "Erkundung",
     "belgium.title": "Der belgische Geist",
     "belgium.atomium": "Das futuristische Symbol von 1958. Ein Eisenkristall, 165 Milliarden Mal vergrößert.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "Asphalt",
     "belgium.fact3": "Der BMI",
     "belgium.factFooter": "...sind belgische Erfindungen!",
-    "hero.discover": "Entdecken ↓",
     "contact.subtitle": "In Kontakt bleiben",
     "contact.title": "Kontakte",
     "contact.dad": "Papa",
     "contact.mom": "Mama",
     "contact.daughter": "Tochter",
-    "contact.son": "Sohn"
+    "contact.son": "Sohn",
+    "footer.love": "Mit Liebe für unsere Versammlung gemacht"
 }

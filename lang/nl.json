@@ -1,6 +1,15 @@
 {
+    "nav.group": "Onze Groep",
+    "nav.belgium": "België",
+    "nav.gallery": "Galerij",
+    "nav.contact": "Contact",
+    "hero.badge": "Internationale Vergadering",
+    "hero.discover": "Ontdekken",
+    "assembly.subtitle": "Onze Gemeenschap",
     "assembly.title": "Onze Vergadering",
     "assembly.descExpanded": "Onze Vergadering is gevestigd in Waver en haar grondgebied strekt zich uit tot Louvain-la-Neuve.",
+    "assembly.international": "Internationaal",
+    "assembly.unity": "Verenigd",
     "belgium.subtitle": "Verkenning",
     "belgium.title": "De Belgische Geest",
     "belgium.atomium": "Het futuristische symbool van 1958. Een ijzerkristal 165 miljard keer vergroot.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "Asfalt",
     "belgium.fact3": "De BMI",
     "belgium.factFooter": "...Belgische uitvindingen zijn!",
-    "hero.discover": "Ontdekken ↓",
     "contact.subtitle": "Laten we contact houden",
     "contact.title": "Contacten",
     "contact.dad": "Papa",
     "contact.mom": "Mama",
     "contact.daughter": "Dochter",
-    "contact.son": "Zoon"
+    "contact.son": "Zoon",
+    "footer.love": "Met liefde gemaakt voor onze vergadering"
 }

@@ -1,6 +1,15 @@
 {
+    "nav.group": "Our Group",
+    "nav.belgium": "Belgium",
+    "nav.gallery": "Gallery",
+    "nav.contact": "Contact",
+    "hero.badge": "International Assembly",
+    "hero.discover": "Discover",
+    "assembly.subtitle": "Our Community",
     "assembly.title": "Our Congregation",
     "assembly.descExpanded": "Our Congregation is based in Wavre and its territory extends to Louvain-la-Neuve.",
+    "assembly.international": "International",
+    "assembly.unity": "United",
     "belgium.subtitle": "Exploration",
     "belgium.title": "The Belgian Spirit",
     "belgium.atomium": "The futuristic symbol of 1958. An iron crystal magnified 165 billion times.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "Asphalt",
     "belgium.fact3": "BMI",
     "belgium.factFooter": "...are Belgian inventions!",
-    "hero.discover": "Discover ↓",
     "contact.subtitle": "Let's stay in touch",
     "contact.title": "Contacts",
     "contact.dad": "Dad",
     "contact.mom": "Mom",
     "contact.daughter": "Daughter",
-    "contact.son": "Son"
-}
+    "contact.son": "Son",
+    "footer.love": "Made with love for our congregation"
+}

@@ -12,12 +12,51 @@ document.addEventListener('DOMContentLoaded', () => {
         ]
     };
 
+    // --- 0. NAVIGATION ---
+    const mainNav = document.getElementById('mainNav');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    // Scrolled state
+    function updateNav() {
+        if (window.scrollY > 60) {
+            mainNav.classList.add('scrolled');
+        } else {
+            mainNav.classList.remove('scrolled');
+        }
+    }
+
+    // Active link tracking
+    function updateActiveLink() {
+        const scrollPos = window.scrollY + 120;
+        sections.forEach(section => {
+            const top = section.offsetTop;
+            const height = section.offsetHeight;
+            const id = section.getAttribute('id');
+            const link = document.querySelector(`.nav-link[href="#${id}"]`);
+            if (link) {
+                if (scrollPos >= top && scrollPos < top + height) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', () => {
+        requestAnimationFrame(() => {
+            updateNav();
+            updateActiveLink();
+        });
+    }, { passive: true });
+    updateNav();
+
     // --- 1. HERO ANIMATIONS ---
     const cloudContainer = document.getElementById('bonjour-container');
     const layers = document.querySelectorAll('.hero-text-layer');
     const heroSection = document.getElementById('hero');
 
-    // Floating Words (More frequent spawn)
+    // Floating Words
     if (cloudContainer) {
         function spawnGreeting() {
             const wordData = CONFIG.greetings[Math.floor(Math.random() * CONFIG.greetings.length)];
@@ -25,42 +64,38 @@ document.addEventListener('DOMContentLoaded', () => {
             el.innerText = wordData.text;
             el.className = 'floating-word';
 
-            // Mobile-optimized placement (Bigger & Faster)
             const x = Math.random() * 90 + 5;
             const y = Math.random() * 90 + 5;
-            const scale = Math.random() * 1.5 + 1.0; // BIGGER: 1.0 to 2.5
-            const duration = Math.random() * 4 + 4; // FASTER: 4 to 8 seconds
+            const scale = Math.random() * 1.5 + 1.0;
+            const duration = Math.random() * 4 + 4;
 
             el.style.left = `${x}%`;
             el.style.top = `${y}%`;
             el.style.fontSize = `${2 * scale}rem`;
             el.style.opacity = '0';
-            el.style.color = Math.random() > 0.9 ? 'var(--gold)' : 'rgba(255,255,255,0.1)';
-            el.style.textShadow = '0 0 10px rgba(0,0,0,0.5)';
+            el.style.color = Math.random() > 0.85 ? 'var(--gold)' : `rgba(255,255,255,${0.04 + Math.random() * 0.08})`;
+            el.style.textShadow = '0 0 20px rgba(0,0,0,0.3)';
 
             cloudContainer.appendChild(el);
 
             el.animate([
                 { opacity: 0, transform: `translateY(40px) scale(${scale})` },
-                { opacity: 0.9, transform: `translateY(0px) scale(${scale})`, offset: 0.2 },
-                { opacity: 0.9, transform: `translateY(-40px) scale(${scale})`, offset: 0.8 },
+                { opacity: 0.7, transform: `translateY(0px) scale(${scale})`, offset: 0.2 },
+                { opacity: 0.7, transform: `translateY(-40px) scale(${scale})`, offset: 0.8 },
                 { opacity: 0, transform: `translateY(-80px) scale(${scale})` }
             ], {
                 duration: duration * 1000,
                 easing: 'ease-in-out'
             }).onfinish = () => el.remove();
         }
-        setInterval(spawnGreeting, 500); // More frequent spawn
+        setInterval(spawnGreeting, 600);
     }
 
-    // Real Gyroscope Parallax
+    // Gyroscope Parallax
     function handleOrientation(event) {
-        // Gamma: Left/Right tilt (-90 to 90)
-        // Beta: Front/Back tilt (-180 to 180)
         const x = event.gamma || 0;
         const y = event.beta || 0;
 
-        // Clamp values to avoid extreme shifts
         const moveX = Math.max(-30, Math.min(30, x));
         const moveY = Math.max(-30, Math.min(30, y - 45));
 
@@ -72,16 +107,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Request Permission for iOS 13+
+    // iOS 13+ permission
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
         const permBtn = document.createElement('button');
         permBtn.innerText = "Enable 3D Effects";
-        permBtn.style.position = 'fixed'; permBtn.style.bottom = '20px'; permBtn.style.left = '50%';
-        permBtn.style.transform = 'translateX(-50%)'; permBtn.style.zIndex = '9999';
-        permBtn.style.padding = '12px 24px'; permBtn.style.background = 'var(--gold)';
-        permBtn.style.fontSize = '1rem'; permBtn.style.fontWeight = 'bold';
-        permBtn.style.border = 'none'; permBtn.style.color = '#000'; permBtn.style.borderRadius = '30px';
-        permBtn.style.boxShadow = '0 10px 20px rgba(0,0,0,0.5)';
+        permBtn.style.cssText = `
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            z-index: 9999; padding: 12px 28px; background: var(--gold);
+            font-size: 0.9rem; font-weight: 600; border: none; color: #000;
+            border-radius: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: var(--font-body); cursor: none;
+        `;
         document.body.appendChild(permBtn);
 
         permBtn.addEventListener('click', () => {
@@ -95,11 +131,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .catch(console.error);
         });
     } else {
-        // Non-iOS 13+ devices
         window.addEventListener('deviceorientation', handleOrientation);
     }
 
-    // Mouse Fallback
+    // Mouse Fallback for parallax
     if (heroSection) {
         heroSection.addEventListener('mousemove', (e) => {
             const x = (window.innerWidth - e.pageX * 2) / 100;
@@ -111,8 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    // --- 2. THREE.JS ATOMIUM (STL LOADING) ---
+    // --- 2. THREE.JS ATOMIUM ---
     const atomiumContainer = document.getElementById('atomium-container');
     if (atomiumContainer && window.THREE) {
         init3D();
@@ -123,20 +157,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = atomiumContainer.clientHeight;
 
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x050505);
+        scene.background = new THREE.Color(0x080808);
 
         const camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 1000);
-        camera.position.set(0, 0, 150); // CLOSER (was 300) to appear Bigger
+        camera.position.set(0, 0, 150);
 
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(width, height);
-        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 1.25;
+        renderer.toneMappingExposure = 1.3;
         atomiumContainer.appendChild(renderer.domElement);
 
-        // Lighting (Cinematic)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        // Cinematic Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
         scene.add(ambientLight);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 2);
@@ -149,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
         spotLight.penumbra = 0.5;
         scene.add(spotLight);
 
-        const goldLight = new THREE.PointLight(0xD4AF37, 2.5);
+        const goldLight = new THREE.PointLight(0xE8C547, 2);
         goldLight.position.set(-50, 20, 50);
         scene.add(goldLight);
 
@@ -157,24 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const loader = new THREE.STLLoader();
         loader.load('assets/atomium.stl', (geometry) => {
             const material = new THREE.MeshPhysicalMaterial({
-                color: 0xdddddd, // Lighter base
-                metalness: 0.5,  // Less metal = more visible color
-                roughness: 0.2,  // Slightly rougher to catch light
+                color: 0xdddddd,
+                metalness: 0.5,
+                roughness: 0.2,
                 clearcoat: 1.0,
                 clearcoatRoughness: 0.1,
                 reflectivity: 0.8
             });
             const mesh = new THREE.Mesh(geometry, material);
-
             geometry.center();
-
-            // CORRECTION FOR ORIENTATION & SCALE
             mesh.rotation.x = -Math.PI / 2;
-            mesh.scale.set(1.5, 1.5, 1.5); // BIGGER scaling
-
+            mesh.scale.set(1.5, 1.5, 1.5);
             scene.add(mesh);
 
-            // Animation Loop
             function animate() {
                 requestAnimationFrame(animate);
                 mesh.rotation.z += 0.003;
@@ -200,14 +229,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.classList.add('is-visible');
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.mag-article, .hub-card, .masonry-item').forEach(el => {
+    document.querySelectorAll('.mag-article, .contact-card, .masonry-item, .group-photo-wrapper, .group-info').forEach(el => {
         el.classList.add('fade-in-section');
         observer.observe(el);
     });
 
-    // --- 4. LOCALE & TRANSLATIONS (FETCH BASED) ---
+    // --- 4. LOCALE & TRANSLATIONS ---
     const langSelect = document.getElementById('langSelect');
     let currentLang = CONFIG.defaultLang;
 
@@ -220,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const translations = await response.json();
             applyTranslations(translations);
 
-            // Save preference
             try {
                 localStorage.setItem('prefLang', lang);
             } catch (e) {
@@ -240,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (langSelect) {
-        // Load saved language or default
         try {
             const saved = localStorage.getItem('prefLang');
             if (saved) currentLang = saved;
@@ -257,16 +284,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. CUSTOM CURSOR (Hidden on touch devices usually, but kept for hybrid) ---
+    // --- 5. CUSTOM CURSOR ---
     const cursor = document.getElementById('cursor');
     if (matchMedia('(pointer:fine)').matches && cursor) {
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
-        // Hover effects...
+
+        // Smooth cursor follow
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effect on interactive elements
+        document.querySelectorAll('a, button, select, .upload-zone, .mag-article, .contact-card').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
     } else {
-        if (cursor) cursor.style.display = 'none'; // Hide on touch
+        if (cursor) cursor.style.display = 'none';
+        // Restore default cursor on touch devices
+        document.documentElement.style.cursor = 'auto';
+        document.querySelectorAll('*').forEach(el => { el.style.cursor = ''; });
     }
 
     // --- 6. IMAGE UPLOAD & COMPRESSION (ImgBB) ---
@@ -284,10 +332,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!dropZone || !fileInput) return;
 
-        // Click trigger
         dropZone.addEventListener('click', () => fileInput.click());
 
-        // Drag & Drop
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.classList.add('dragover');
@@ -301,21 +347,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
         });
 
-        // File Select
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length) handleFile(e.target.files[0]);
         });
 
         function handleFile(file) {
-            // Reset UI
             progressContainer.style.display = 'block';
             successMsg.style.display = 'none';
             errorMsg.style.display = 'none';
             uploadContent.style.opacity = '0.5';
             progressBar.style.width = '0%';
-            progressText.innerText = "Analyse du fichier..."; // Default generic msg, will be translated if full re-run
+            progressText.innerText = "Analyse du fichier...";
 
-            const MAX_SIZE = 31 * 1024 * 1024; // 31MB
+            const MAX_SIZE = 31 * 1024 * 1024;
 
             if (file.size > MAX_SIZE) {
                 progressText.innerText = "Compression en cours...";
@@ -337,7 +381,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
 
-                    // Resize logic: Max 4096px dimension to be safe & significant reduction
                     let width = img.width;
                     let height = img.height;
                     const MAX_DIM = 4096;
@@ -358,7 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.height = height;
                     ctx.drawImage(img, 0, 0, width, height);
 
-                    // Compress to JPEG 0.8
                     canvas.toBlob((blob) => {
                         callback(blob);
                     }, 'image/jpeg', 0.8);
@@ -380,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
             xhr.upload.onprogress = (e) => {
                 if (e.lengthComputable) {
                     const percentComplete = (e.loaded / e.total) * 100;
-                    progressBar.style.width = Math.min(percentComplete, 90) + '%'; // Keep 10% for processing
+                    progressBar.style.width = Math.min(percentComplete, 90) + '%';
                 }
             };
 
@@ -393,12 +435,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         successMsg.style.display = 'block';
                         addToGallery(response.data.display_url || response.data.url);
 
-                        // Reset after delay
                         setTimeout(() => {
                             progressContainer.style.display = 'none';
                             successMsg.style.display = 'none';
                             uploadContent.style.opacity = '1';
-                            fileInput.value = ''; // Reset input
+                            fileInput.value = '';
                         }, 5000);
                     } else {
                         showError();
@@ -424,20 +465,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = document.createElement('div');
             item.className = 'masonry-item fade-in-section';
 
-            // Create proper Image element
             const img = document.createElement('img');
             img.src = url;
             img.style.width = '100%';
-            img.style.borderRadius = '10px';
             img.style.display = 'block';
 
             item.appendChild(img);
-
-            // Prepend or Append? Prepend to show latest first
             galleryGrid.insertBefore(item, galleryGrid.firstChild);
 
-            // Trigger scroll observer for animation
-            if (window.observer) window.observer.observe(item);
+            if (observer) observer.observe(item);
             setTimeout(() => item.classList.add('is-visible'), 100);
         }
     }
@@ -447,7 +483,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadGalleryImages() {
         try {
-            // Add cache-busting to ensure instant updates
             const response = await fetch(`assets/gallery.json?t=${new Date().getTime()}`);
             if (!response.ok) throw new Error("Gallery manifest not found");
 
@@ -455,7 +490,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const galleryGrid = document.getElementById('gallery-grid');
 
             if (images.length > 0 && galleryGrid) {
-                // Clear any existing static items just in case (though we removed them)
                 galleryGrid.innerHTML = '';
 
                 images.forEach(src => {
@@ -467,16 +501,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     img.loading = "lazy";
                     img.style.width = "100%";
                     img.style.display = "block";
-                    img.style.borderRadius = "10px"; // Ensure styling matches
 
                     item.appendChild(img);
                     galleryGrid.appendChild(item);
 
-                    // Observe for animation
-                    if (typeof observer !== 'undefined') {
+                    if (observer) {
                         observer.observe(item);
                     } else {
-                        item.classList.add('is-visible'); // Fallback
+                        item.classList.add('is-visible');
                     }
                 });
             }

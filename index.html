@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bonjour - Assembly 2026</title>
+    <title>Bonjour — Assemblée 2026</title>
+    <meta name="description" content="Site officiel de l'Assemblée 2026 — Bienvenue en Belgique. Découvrez notre groupe, la culture belge et partagez vos souvenirs.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Three.js (for STL) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> <!-- Smooth anims -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,6 +22,29 @@
 
     <!-- CUSTOM CURSOR -->
     <div id="cursor"></div>
+
+    <!-- STICKY NAVIGATION -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="#hero" class="nav-logo">Assemblée <span>2026</span></a>
+            <div class="nav-links">
+                <a href="#group" class="nav-link" data-i18n="nav.group">Notre Groupe</a>
+                <a href="#belgium" class="nav-link" data-i18n="nav.belgium">Belgique</a>
+                <a href="#gallery" class="nav-link" data-i18n="nav.gallery">Galerie</a>
+                <a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+            </div>
+            <select id="langSelect" class="nav-lang-select">
+                <option value="fr">🇫🇷 FR</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="nl">🇳🇱 NL</option>
+                <option value="de">🇩🇪 DE</option>
+                <option value="es">🇪🇸 ES</option>
+                <option value="pt">🇵🇹 PT</option>
+                <option value="ko">🇰🇷 KO</option>
+                <option value="pap">🏝️ PAP</option>
+            </select>
+        </div>
+    </nav>
 
     <!-- MAIN WRAPPER -->
     <main>
@@ -30,52 +54,76 @@
             <!-- Floating Words Container -->
             <div id="bonjour-container" class="bonjour-cloud"></div>
             
+            <!-- Ambient particles -->
+            <div class="hero-particles" id="heroParticles"></div>
+            
             <!-- Parallax Layers -->
             <div class="hero-text-layer layer-bg" data-speed="-2">Bonjour</div>
             <div class="hero-text-layer layer-mid" data-speed="1">Welcome</div>
             <div class="hero-text-layer layer-front" data-speed="2">Bonjour</div>
             
-            <div class="scroll-indicator" data-i18n="hero.discover">
-                Découvrir ↓
+            <!-- Event Badge -->
+            <div class="hero-badge glass-panel">
+                <span class="badge-year">2026</span>
+                <span class="badge-label" data-i18n="hero.badge">Assemblée Internationale</span>
             </div>
             
-            <!-- Hidden Language Trigger (hover area top right) -->
-            <div class="lang-trigger" style="position:absolute; top:30px; right:30px; z-index:100;">
-                <select id="langSelect" class="glass-panel" style="padding:10px; border:none; color:var(--primary);">
-                    <option value="fr">Français</option>
-                    <option value="en">English</option>
-                    <option value="nl">Nederlands</option>
-                    <option value="de">Deutsch</option>
-                    <option value="es">Español</option>
-                    <option value="pt">Português</option>
-                    <option value="ko">한국어</option>
-                    <option value="pap">Papiamento</option>
-                </select>
+            <div class="scroll-indicator" data-i18n="hero.discover">
+                <span class="scroll-text">Découvrir</span>
+                <div class="scroll-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
             </div>
         </section>
 
-        <!-- 2. ASSEMBLY: GLASS HUB -->
-        <section class="info-section">
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- 2. GROUP SECTION -->
+        <section class="group-section" id="group">
             <div class="container">
-                <div class="glass-hub glass-panel">
-                    <div class="hub-main">
-                        <h2 class="hub-title" data-i18n="assembly.title">Notre Groupe</h2>
-                        <p class="hub-text" data-i18n="assembly.descExpanded">
-                            Une assemblée unie par l'amour fraternel. Voici quelques souvenirs de notre groupe.
+                <div class="magazine-header">
+                    <span data-i18n="assembly.subtitle">Notre Communauté</span>
+                    <h1 data-i18n="assembly.title">Notre Assemblée</h1>
+                </div>
+                
+                <div class="group-content">
+                    <div class="group-photo-wrapper">
+                        <div class="group-photo-frame">
+                            <img src="assets/Group.jpg" alt="Photo de notre assemblée" class="group-photo" id="groupPhoto">
+                        </div>
+                        <div class="photo-glow"></div>
+                    </div>
+                    <div class="group-info glass-panel">
+                        <p class="group-description" data-i18n="assembly.descExpanded">
+                            Notre Assemblée est basée à Wavre et son territoire s'étend sur Louvain-la-Neuve.
                         </p>
-                        <!-- Group Photo Placeholder -->
-                        <!-- Group Photo Placeholder / Coming Soon -->
-                        <div style="height:300px; background:linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01)); display:flex; flex-direction:column; align-items:center; justify-content:center; border-radius:10px; border:1px solid var(--glass-border);">
-                            <span style="font-size:3rem; margin-bottom:1rem;">👥</span>
-                            <span style="color:var(--text-muted); font-style:italic;" data-i18n="assembly.photoPlaceholder">Photo de groupe à venir</span>
+                        <div class="group-stats">
+                            <div class="stat-item">
+                                <span class="stat-icon">🏛️</span>
+                                <span class="stat-label">Wavre</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">🌍</span>
+                                <span class="stat-label" data-i18n="assembly.international">International</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-icon">💛</span>
+                                <span class="stat-label" data-i18n="assembly.unity">Unis</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
         <!-- 3. BELGIUM: THE ULTIMATE GUIDE (Magazine Grid) -->
-        <section class="belgium-section">
+        <section class="belgium-section" id="belgium">
             <div class="container">
                 <div class="magazine-header">
                     <span data-i18n="belgium.subtitle">Exploration</span>
@@ -86,7 +134,7 @@
                     
                     <!-- ATOMIUM (Full Width) -->
                     <div class="mag-article span-full" style="height: 60vh;">
-                        <div id="atomium-container" style="width:100%; height:100%; background:#111;"></div>
+                        <div id="atomium-container" style="width:100%; height:100%; background:#080808;"></div>
                         <div class="mag-content" style="pointer-events:none;">
                             <h3 data-i18n="belgium.atomiumTitle">L'Atomium</h3>
                             <p data-i18n="belgium.atomium">Le symbole futuriste de 1958.</p>
@@ -120,7 +168,7 @@
                         <div class="mag-content">
                             <h3 data-i18n="belgium.fries">La Frite Parfaite</h3>
                             <p data-i18n="belgium.friesDesc">
-                                Le secret ? La double cuisson. Une fois à 140°C pour pochar, une seconde à 170°C pour dorer. Croustillante dehors, moelleuse dedans.
+                                Le secret ? La double cuisson. Une fois à 140°C pour pocher, une seconde à 170°C pour dorer. Croustillante dehors, moelleuse dedans.
                             </p>
                         </div>
                     </div>
@@ -151,7 +199,7 @@
                     <div class="mag-article text-only span-small">
                         <div class="mag-content">
                             <h3 data-i18n="belgium.didYouKnow">Le Saviez-vous ?</h3>
-                            <ul style="list-style:disc; margin-left:20px;">
+                            <ul class="fact-list">
                                 <li data-i18n="belgium.fact1">Le Saxophone</li>
                                 <li data-i18n="belgium.fact2">L'Asphalte</li>
                                 <li data-i18n="belgium.fact3">L'Imc</li>
@@ -164,32 +212,41 @@
             </div>
         </section>
 
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
         <!-- 4. GALLERY -->
-        <section class="gallery-section">
+        <section class="gallery-section" id="gallery">
             <div class="container">
                 <div class="magazine-header">
                     <span data-i18n="gallery.subtitle">Moments Précieux</span>
                     <h2 data-i18n="gallery.title">Nos Souvenirs</h2>
                 </div>
 
-                <div class="text-center" style="margin-bottom: 30px;">
-                    <div id="upload-zone" class="glass-panel" style="padding: 40px; border: 2px dashed rgba(255,255,255,0.3); border-radius: 20px; cursor: pointer; transition: all 0.3s ease; max-width: 600px; margin: 0 auto;">
+                <div class="upload-wrapper">
+                    <div id="upload-zone" class="upload-zone glass-panel">
                         <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                        <div id="upload-content">
-                            <span style="font-size: 3rem; display: block; margin-bottom: 10px;">📸</span>
-                            <h3 data-i18n="gallery.uploadTitle" style="margin-bottom: 5px;">Partager une photo</h3>
-                            <p data-i18n="gallery.uploadDesc" style="color: var(--text-muted); font-size: 0.9rem;">Cliquez ou glissez-déposez ici (Max 32MB)</p>
-                        </div>
-                        <div id="upload-progress" style="display: none; margin-top: 20px;">
-                            <div style="width: 100%; background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
-                                <div id="progress-bar" style="width: 0%; height: 100%; background: var(--gold); transition: width 0.3s;"></div>
+                        <div id="upload-content" class="upload-content">
+                            <div class="upload-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                    <polyline points="17 8 12 3 7 8"></polyline>
+                                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                                </svg>
                             </div>
-                            <p id="progress-text" style="font-size: 0.8rem; margin-top: 5px;">Préparation...</p>
+                            <h3 data-i18n="gallery.uploadTitle">Partager une photo</h3>
+                            <p data-i18n="gallery.uploadDesc">Cliquez ou glissez-déposez ici (Max 32MB)</p>
                         </div>
-                        <div id="upload-success" style="display: none; margin-top: 20px; color: #4ecca3;">
+                        <div id="upload-progress" class="upload-progress">
+                            <div class="progress-track">
+                                <div id="progress-bar" class="progress-fill"></div>
+                            </div>
+                            <p id="progress-text" class="progress-text">Préparation...</p>
+                        </div>
+                        <div id="upload-success" class="upload-msg success">
                             ✅ Photo ajoutée !
                         </div>
-                        <div id="upload-error" style="display: none; margin-top: 20px; color: #ff6b6b;">
+                        <div id="upload-error" class="upload-msg error">
                             ❌ Erreur lors de l'envoi.
                         </div>
                     </div>
@@ -201,52 +258,105 @@
             </div>
         </section>
 
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
         <!-- 5. CONTACT SECTION -->
-        <section class="contact-section" style="padding: 100px 0;">
+        <section class="contact-section" id="contact">
             <div class="container">
                 <div class="magazine-header">
                     <span data-i18n="contact.subtitle">Restons en contact</span>
                     <h2 data-i18n="contact.title">Contacts</h2>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px;">
+                <div class="contacts-grid">
                     <!-- Contact 1 -->
-                    <div class="glass-panel" style="padding: 20px; text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
-                        <h3 style="margin-bottom: 5px;">Alexandre Bruijninckx</h3>
-                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.dad">Papa</p>
-                        <p>📞 +32 486 45 90 06</p>
-                        <p>✉️ <a href="mailto:alexandre@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">alexandre@bruijninckx.net</a></p>
+                    <div class="contact-card glass-panel">
+                        <div class="contact-avatar">
+                            <span>AB</span>
+                        </div>
+                        <h3 class="contact-name">Alexandre Bruijninckx</h3>
+                        <p class="contact-role" data-i18n="contact.dad">Papa</p>
+                        <div class="contact-details">
+                            <a href="tel:+32486459006" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                +32 486 45 90 06
+                            </a>
+                            <a href="mailto:alexandre@bruijninckx.net" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                alexandre@bruijninckx.net
+                            </a>
+                        </div>
                     </div>
                     <!-- Contact 2 -->
-                    <div class="glass-panel" style="padding: 20px; text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
-                        <h3 style="margin-bottom: 5px;">Aurélie Bruijninckx</h3>
-                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.mom">Maman</p>
-                        <p>📞 +32 474 47 00 83</p>
-                        <p>✉️ <a href="mailto:aurelie@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">aurelie@bruijninckx.net</a></p>
+                    <div class="contact-card glass-panel">
+                        <div class="contact-avatar accent-2">
+                            <span>AB</span>
+                        </div>
+                        <h3 class="contact-name">Aurélie Bruijninckx</h3>
+                        <p class="contact-role" data-i18n="contact.mom">Maman</p>
+                        <div class="contact-details">
+                            <a href="tel:+32474470083" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                +32 474 47 00 83
+                            </a>
+                            <a href="mailto:aurelie@bruijninckx.net" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                aurelie@bruijninckx.net
+                            </a>
+                        </div>
                     </div>
                     <!-- Contact 3 -->
-                    <div class="glass-panel" style="padding: 20px; text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
-                        <h3 style="margin-bottom: 5px;">Naomi Bruijninckx</h3>
-                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.daughter">Fille</p>
-                        <p>📞 +32 493 65 28 21</p>
-                        <p>✉️ <a href="mailto:naomi@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">naomi@bruijninckx.net</a></p>
+                    <div class="contact-card glass-panel">
+                        <div class="contact-avatar accent-3">
+                            <span>NB</span>
+                        </div>
+                        <h3 class="contact-name">Naomi Bruijninckx</h3>
+                        <p class="contact-role" data-i18n="contact.daughter">Fille</p>
+                        <div class="contact-details">
+                            <a href="tel:+32493652821" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                +32 493 65 28 21
+                            </a>
+                            <a href="mailto:naomi@bruijninckx.net" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                naomi@bruijninckx.net
+                            </a>
+                        </div>
                     </div>
                     <!-- Contact 4 -->
-                    <div class="glass-panel" style="padding: 20px; text-align: center;">
-                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
-                        <h3 style="margin-bottom: 5px;">Noah Bruijninckx</h3>
-                        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 15px;" data-i18n="contact.son">Fils</p>
-                        <p>📞 +32 486 05 28 06</p>
-                        <p>✉️ <a href="mailto:noah@bruijninckx.net" style="color:var(--text-main); text-decoration:none;">noah@bruijninckx.net</a></p>
+                    <div class="contact-card glass-panel">
+                        <div class="contact-avatar accent-4">
+                            <span>NB</span>
+                        </div>
+                        <h3 class="contact-name">Noah Bruijninckx</h3>
+                        <p class="contact-role" data-i18n="contact.son">Fils</p>
+                        <div class="contact-details">
+                            <a href="tel:+32486052806" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                                +32 486 05 28 06
+                            </a>
+                            <a href="mailto:noah@bruijninckx.net" class="contact-link">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                noah@bruijninckx.net
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
     </main>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-brand">Assemblée <span>2026</span> — Belgique 🇧🇪</p>
+                <p class="footer-sub" data-i18n="footer.love">Fait avec amour pour notre assemblée</p>
+            </div>
+        </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>

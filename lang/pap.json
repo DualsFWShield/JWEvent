@@ -1,6 +1,15 @@
 {
+    "nav.group": "Nos Grupo",
+    "nav.belgium": "Belgika",
+    "nav.gallery": "Galerí",
+    "nav.contact": "Kontakto",
+    "hero.badge": "Asamblea Internashonal",
+    "hero.discover": "Deskubrí",
+    "assembly.subtitle": "Nos Komunidat",
     "assembly.title": "Nos Asamblea",
     "assembly.descExpanded": "Nos Asamblea ta establesé na Wavre i su teritorio ta ekstendé te na Louvain-la-Neuve.",
+    "assembly.international": "Internashonal",
+    "assembly.unity": "Uní",
     "belgium.subtitle": "Eksplorashon",
     "belgium.title": "E Spiritu Belga",
     "belgium.atomium": "E simbolo futuristiko di 1958. Un kristal di heru magnifiká 165 bion biaha.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "Asfalt",
     "belgium.fact3": "BMI",
     "belgium.factFooter": "...ta inventonan belga!",
-    "hero.discover": "Deskubrí ↓",
     "contact.subtitle": "Laga nos keda den kontakto",
     "contact.title": "Kontaktonan",
     "contact.dad": "Tata",
     "contact.mom": "Mama",
     "contact.daughter": "Yiu muhé",
-    "contact.son": "Yiu hòmber"
+    "contact.son": "Yiu hòmber",
+    "footer.love": "Hasí ku amor pa nos asamblea"
 }

@@ -1,6 +1,15 @@
 {
+    "nav.group": "우리 그룹",
+    "nav.belgium": "벨기에",
+    "nav.gallery": "갤러리",
+    "nav.contact": "연락처",
+    "hero.badge": "국제 대회",
+    "hero.discover": "더 알아보기",
+    "assembly.subtitle": "우리의 공동체",
     "assembly.title": "우리의 대회",
     "assembly.descExpanded": "우리의 대회는 와브르(Wavre)에 기반을 두고 있으며, 그 구역은 루뱅라뇌브(Louvain-la-Neuve)까지 확장됩니다.",
+    "assembly.international": "국제적",
+    "assembly.unity": "연합",
     "belgium.subtitle": "탐험",
     "belgium.title": "벨기에의 정신",
     "belgium.atomium": "1958년의 미래지향적 상징. 천육백오십억 배 확대된 철 결정.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "아스팔트",
     "belgium.fact3": "체질량지수",
     "belgium.factFooter": "...모두 벨기에의 발명품입니다!",
-    "hero.discover": "더 알아보기 ↓",
     "contact.subtitle": "연락처",
     "contact.title": "문의하기",
     "contact.dad": "아빠",
     "contact.mom": "엄마",
     "contact.daughter": "딸",
-    "contact.son": "아들"
+    "contact.son": "아들",
+    "footer.love": "우리 모임을 위해 사랑으로 만들었습니다"
 }

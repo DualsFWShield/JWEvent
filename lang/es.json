@@ -1,6 +1,15 @@
 {
+    "nav.group": "Nuestro Grupo",
+    "nav.belgium": "Bélgica",
+    "nav.gallery": "Galería",
+    "nav.contact": "Contacto",
+    "hero.badge": "Asamblea Internacional",
+    "hero.discover": "Descubrir",
+    "assembly.subtitle": "Nuestra Comunidad",
     "assembly.title": "Nuestra Asamblea",
     "assembly.descExpanded": "Nuestra Asamblea tiene su sede en Wavre y su territorio se extiende hasta Louvain-la-Neuve.",
+    "assembly.international": "Internacional",
+    "assembly.unity": "Unidos",
     "belgium.subtitle": "Exploración",
     "belgium.title": "El Espíritu Belga",
     "belgium.atomium": "El símbolo futurista de 1958. Un cristal de hierro magnificado 165 mil millones de veces.",
@@ -26,11 +35,11 @@
     "belgium.fact2": "El Asfalto",
     "belgium.fact3": "El IMC",
     "belgium.factFooter": "...son inventos belgas!",
-    "hero.discover": "Descubrir ↓",
     "contact.subtitle": "Mantengámonos en contacto",
     "contact.title": "Contactos",
     "contact.dad": "Papá",
     "contact.mom": "Mamá",
     "contact.daughter": "Hija",
-    "contact.son": "Hijo"
+    "contact.son": "Hijo",
+    "footer.love": "Hecho con amor para nuestra asamblea"
 }
